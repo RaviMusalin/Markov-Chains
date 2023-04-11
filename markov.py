@@ -44,23 +44,16 @@ def make_chains(text_string):
         
     # your code goes here
     words = text_string.split()
-    word1 = words[0]
-    word2 = words[1]
-    chains[(word1, word2)] = words[2]
-    # chains[words[0], words[1]]: words[2]
     
-    for word in range(1, len(words) - 2):
+    for word in range(0, len(words) - 2):
         if (words[word],words[word + 1]) not in chains:
-            chains[(words[word], words[word + 1])] = words[word + 2]
-        # elif (words[word],words[word + 1]) in chains:
-        #     chains[(words[word], words[word + 1])].append("${words[word + 2]}")
-    print(chains)
+            chains.setdefault((words[word], words[word + 1]), [])
+            chains[(words[word], words[word + 1])] = [words[word + 2]]
+        elif (words[word],words[word + 1]) in chains:
+            chains[(words[word], words[word + 1])].append(words[word + 2])
+    
+    return chains
         
-    #         print("Work to do")
-   # print(chains)
-    # for word in words:
-    #     print(word)
-    #return chains
 
 
 def make_text(chains):
@@ -69,8 +62,20 @@ def make_text(chains):
     words = []
 
     # your code goes here
+    
+    for key in chains:
+        words.extend(sorted(key), chains.get(key))
+    print(words)
+    # testing = choice(list([chains.items()]))
+    # testing = choice(list(chains.keys())) 
+    # words.extend(testing)
+    # print(words)
 
-    return ' '.join(words)
+    # Get a random word from the list of word that follow 
+
+    # Use second word in key and radnom word to make new key, pull a random word out of resulting list
+
+    return #' '.join(words)
 
 
 input_path = 'green-eggs.txt'
