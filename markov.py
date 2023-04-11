@@ -12,8 +12,7 @@ def open_and_read_file(file_path):
 
     # your code goes here
     contents = open(file_path).read()
-    print(contents)
-    
+    return contents    
 
 
 def make_chains(text_string):
@@ -42,15 +41,23 @@ def make_chains(text_string):
     """
 
     chains = {}
-
-    words = text_string.split()
-   
-    print(words)
-
         
     # your code goes here
-
-    return chains
+    words = text_string.split()
+    word1 = words[0]
+    word2 = words[1]
+    chains[(word1, word2)] = words[2]
+    print(chains)
+    # for i in range(len(words)- 1):
+    #     chains[words[0], words[1]]: words[2]
+    #     if ("words[i],words[i + 1]") not in chains:
+    #         chains[(words[i],words[i + 1])]: words[i + 2]
+    #     else:
+    #         print("Work to do")
+   # print(chains)
+    # for word in words:
+    #     print(word)
+    #return chains
 
 
 def make_text(chains):
@@ -69,7 +76,6 @@ input_path = 'green-eggs.txt'
 input_text = open_and_read_file(input_path)
 
 chains = make_chains(input_text)
-print(chains)
 
 # Produce random text
 random_text = make_text(chains)
